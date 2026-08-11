@@ -1,0 +1,7 @@
+# The brand film is a deliverable kept in the repo, not an asset the site
+# serves — nothing under marketing/ is referenced by the app, and the two MP4s
+# are ~29 MB. Excluding it keeps deploys small and fast.
+#
+# If a video should appear ON the site, move that file into public/ and
+# reference it from a component; public/ is always deployed.
+marketing/
