@@ -1,0 +1,528 @@
+@import "tailwindcss";
+
+/* Dark mode is driven by data-theme on <html>, set before paint by the inline
+   script in layout.tsx. Dark is the default; light is opt-in. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------------------
+   Carmo Technology — brand scales
+   Brand: navy #1B3A5C (primary) · copper/gold #C08A3E (accent) · teal #2A9089
+   Teal is reserved for graphics & marketing per the brand guide; the site UI
+   stays navy + copper + neutrals so the accent never loses its impact.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-navy-50: #f2f5f9;
+  --color-navy-100: #e2e9f1;
+  --color-navy-200: #c3d0e0;
+  --color-navy-300: #93aac6;
+  --color-navy-400: #5c7ca3;
+  --color-navy-500: #3c6690;
+  --color-navy-600: #2a5077;
+  --color-navy-700: #1b3a5c;
+  --color-navy-800: #14314c;
+  --color-navy-900: #0f2740;
+  --color-navy-950: #091a2c;
+
+  --color-copper-50: #fbf6ee;
+  --color-copper-100: #f4e8d2;
+  --color-copper-200: #e8cfa4;
+  --color-copper-300: #d9b273;
+  --color-copper-400: #cd9d53;
+  --color-copper-500: #c08a3e;
+  --color-copper-600: #a4712f;
+  --color-copper-700: #825829;
+  --color-copper-800: #6a4726;
+  --color-copper-900: #593c23;
+
+  --color-teal-400: #45aca4;
+  --color-teal-500: #2a9089;
+  --color-teal-600: #227872;
+
+  --color-sand-50: #fafafa;
+  --color-sand-100: #f4f5f7;
+  --color-sand-200: #e9ebef;
+  --color-sand-300: #d8dde5;
+  --color-sand-400: #b3bcc9;
+  --color-sand-500: #8a94a3;
+  --color-sand-600: #6b7684;
+  --color-sand-700: #4d5663;
+
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-brand: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  --animate-float: float 11s ease-in-out infinite;
+  --animate-float-slow: float 17s ease-in-out infinite;
+  --animate-drift: drift 22s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.6s linear infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-halo: halo 2.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-rise: rise 0.85s var(--ease-out-brand) both;
+  --animate-spin-slow: spin 34s linear infinite;
+  --animate-beam: beam 3.4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+  33% {
+    transform: translate3d(4%, -6%, 0) scale(1.08);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate3d(-5%, 4%, 0) scale(0.95);
+    opacity: 0.45;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes halo {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes beam {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Semantic tokens.
+
+   Every surface/text colour in the UI resolves through these, so switching
+   themes is a single attribute change on <html> — components never need a
+   `dark:` variant for ordinary colouring.
+
+   Dark is the default (:root). Light is opt-in via [data-theme="light"].
+--------------------------------------------------------------------------- */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --canvas: #070c15;
+  --panel: #0a1120;
+  --card: #0e1626;
+  --card-hover: #131d31;
+  --line: #1d2740;
+  --line-strong: #2b3a57;
+
+  --fg: #eaf0f9;
+  --muted: #9fb0c8;
+  --subtle: #6c7e99;
+
+  --accent: #d9b273;
+  --accent-strong: #cd9d53;
+
+  /* Hero / CTA / footer panels — dark in both themes, but tuned per theme so
+     they still separate from the page behind them. */
+  --ink-from: #050911;
+  --ink-to: #0b1526;
+  --ink-line: rgba(255, 255, 255, 0.08);
+
+  --glow-a: rgba(192, 138, 62, 0.22);
+  --glow-b: rgba(42, 144, 137, 0.16);
+  --glow-c: rgba(60, 102, 144, 0.2);
+
+  --grid-line: rgba(255, 255, 255, 0.07);
+  --header-bg: rgba(7, 12, 21, 0.72);
+
+  --shadow-card-v: 0 1px 0 rgb(255 255 255 / 0.03) inset,
+    0 12px 32px -18px rgb(0 0 0 / 0.9);
+  --shadow-lift-v: 0 1px 0 rgb(255 255 255 / 0.05) inset,
+    0 28px 60px -24px rgb(0 0 0 / 0.95);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --canvas: #ffffff;
+  --panel: #f4f6fa;
+  --card: #ffffff;
+  --card-hover: #ffffff;
+  --line: #e5e9f0;
+  --line-strong: #d3dae5;
+
+  --fg: #0f2740;
+  --muted: #4d5663;
+  --subtle: #8a94a3;
+
+  --accent: #a4712f;
+  --accent-strong: #c08a3e;
+
+  --ink-from: #0b1c30;
+  --ink-to: #143050;
+  --ink-line: rgba(255, 255, 255, 0.1);
+
+  --glow-a: rgba(192, 138, 62, 0.3);
+  --glow-b: rgba(42, 144, 137, 0.2);
+  --glow-c: rgba(60, 102, 144, 0.26);
+
+  --grid-line: rgba(15, 39, 64, 0.07);
+  --header-bg: rgba(255, 255, 255, 0.78);
+
+  --shadow-card-v: 0 1px 2px rgb(15 39 64 / 0.04),
+    0 8px 24px -8px rgb(15 39 64 / 0.1);
+  --shadow-lift-v: 0 2px 4px rgb(15 39 64 / 0.05),
+    0 20px 48px -16px rgb(15 39 64 / 0.22);
+}
+
+/* Expose the semantic tokens as Tailwind utilities: bg-canvas, text-muted,
+   border-line, shadow-card … `inline` keeps the var() at the use site so the
+   values track the active theme. */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-panel: var(--panel);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+
+  --shadow-card: var(--shadow-card-v);
+  --shadow-lift: var(--shadow-lift-v);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    transition:
+      background-color 0.4s var(--ease-out-brand),
+      color 0.4s var(--ease-out-brand);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Single, consistent focus treatment across the whole site. */
+  :focus-visible {
+    outline: 2px solid var(--accent-strong);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--accent-strong);
+    color: #091a2c;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--canvas);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border: 3px solid var(--canvas);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-strong);
+  }
+}
+
+@layer components {
+  /* The copper "O" ring motif, reused as a link underline. */
+  .link-underline {
+    background-image: linear-gradient(var(--accent-strong), var(--accent-strong));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1.5px;
+    transition: background-size 0.4s var(--ease-out-brand);
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1.5px;
+  }
+
+  /* Hero / CTA / footer panels. Dark in both themes. */
+  .ink-panel {
+    background-image: linear-gradient(160deg, var(--ink-from), var(--ink-to));
+    color: #ffffff;
+  }
+
+  /* Blueprint grid, faded out with a radial mask. */
+  .grid-field {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: var(--grid-size, 72px) var(--grid-size, 72px);
+    mask-image: var(
+      --grid-mask,
+      radial-gradient(ellipse 85% 70% at 30% 0%, #000 35%, transparent 100%)
+    );
+  }
+
+  .grid-field-ink {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.075) 1px, transparent 1px);
+  }
+
+  /* Copper→teal gradient text for the one phrase per page that carries the
+     headline. Used sparingly. */
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      var(--color-copper-300),
+      var(--color-copper-500) 45%,
+      var(--color-teal-400)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Mouse-tracked spotlight. --mx/--my are written by Spotlight.tsx.
+     `isolate` lets ::after sit behind the card's content but above its
+     background, while ::before draws the border ring over the top. */
+  .spotlight {
+    isolation: isolate;
+  }
+
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      220px circle at var(--mx, 50%) var(--my, 0%),
+      var(--accent-strong),
+      transparent 65%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.45s var(--ease-out-brand);
+    pointer-events: none;
+  }
+
+  .spotlight:hover::before,
+  .spotlight:focus-within::before {
+    opacity: 1;
+  }
+
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      340px circle at var(--mx, 50%) var(--my, 0%),
+      color-mix(in srgb, var(--accent-strong) 10%, transparent),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.45s var(--ease-out-brand);
+    pointer-events: none;
+  }
+
+  .spotlight:hover::after,
+  .spotlight:focus-within::after {
+    opacity: 1;
+  }
+
+  /* Sweeping highlight across primary buttons on hover. */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .btn-sheen > span.sheen {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.55) 50%,
+      transparent 80%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.75s var(--ease-out-brand);
+  }
+
+  .btn-sheen:hover > span.sheen,
+  .btn-sheen:focus-visible > span.sheen {
+    transform: translateX(120%);
+  }
+
+  /* Subtle film grain over the big dark panels — kills gradient banding. */
+  .noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveal — opt-out via prefers-reduced-motion is handled below, where
+   revealed content is shown immediately in its final state.
+--------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.8s var(--ease-out-brand),
+    transform 0.8s var(--ease-out-brand),
+    filter 0.8s var(--ease-out-brand);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal[data-variant="up"] {
+  transform: translate3d(0, 22px, 0);
+}
+
+.reveal[data-variant="left"] {
+  transform: translate3d(-26px, 0, 0);
+}
+
+.reveal[data-variant="right"] {
+  transform: translate3d(26px, 0, 0);
+}
+
+.reveal[data-variant="scale"] {
+  transform: scale(0.96);
+}
+
+.reveal[data-variant="blur"] {
+  transform: translate3d(0, 14px, 0);
+  filter: blur(8px);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

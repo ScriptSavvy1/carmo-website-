@@ -1,0 +1,17 @@
+node_modules/
+.next/
+out/
+build/
+.DS_Store
+*.pem
+npm-debug.log*
+.env*
+!.env.example
+next-env.d.ts
+.vercel
+*.tsbuildinfo
+
+# Brand film: intermediate frame sequences and the font-inlined build of
+# scene.html. The finished .mp4 / .jpg deliverables are kept.
+marketing/video/.frames-*/
+marketing/video/.scene.*.html
