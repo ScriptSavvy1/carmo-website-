@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import ThemeToggle from "./ThemeToggle";
 import { WhatsAppIcon } from "./icons";
-import { nav, whatsappHref } from "@/lib/site";
+import { nav, strategyCallHref, whatsappHref } from "@/lib/site";
 import { ArrowRight, Container } from "./ui";
 
 export default function Header() {
@@ -43,8 +43,13 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  // The most specific matching item wins, so /services/ai-automation lights
+  // "AI Solutions" rather than both it and "Services".
+  const activeHref = nav
+    .map((item) => item.href as string)
+    .filter((href) => pathname === href || pathname.startsWith(`${href}/`))
+    .sort((a, b) => b.length - a.length)[0];
+  const isActive = (href: string) => href === activeHref;
 
   return (
     <header
@@ -65,7 +70,7 @@ export default function Header() {
             <Logo className="text-[1.45rem]" />
           </Link>
 
-          <nav aria-label="Primary" className="hidden lg:block">
+          <nav aria-label="Primary" className="hidden xl:block">
             <ul className="flex items-center gap-1">
               {nav.map((item) => (
                 <li key={item.href}>
@@ -104,14 +109,16 @@ export default function Header() {
               <WhatsAppIcon className="h-4.5 w-4.5" />
             </a>
 
-            <Link
-              href="/contact"
-              className="btn-sheen ml-1 hidden rounded-full bg-copper-500 px-5 py-2.5 text-sm font-semibold text-navy-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-copper-400 hover:shadow-[0_12px_28px_-10px_rgba(192,138,62,0.7)] lg:inline-flex lg:items-center lg:gap-2"
+            <a
+              href={strategyCallHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-sheen ml-1 hidden rounded-full bg-copper-500 px-5 py-2.5 text-sm font-semibold text-navy-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-copper-400 hover:shadow-[0_12px_28px_-10px_rgba(192,138,62,0.7)] md:inline-flex md:items-center md:gap-2"
             >
               <span aria-hidden="true" className="sheen" />
-              Get in touch
+              Book a free call
               <ArrowRight />
-            </Link>
+            </a>
 
             <button
               type="button"
@@ -119,7 +126,7 @@ export default function Header() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="relative z-10 -mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-fg transition-colors hover:bg-panel lg:hidden"
+              className="relative z-10 -mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-fg transition-colors hover:bg-panel xl:hidden"
             >
               <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
               <span aria-hidden="true" className="flex w-5 flex-col gap-[5px]">
@@ -150,9 +157,9 @@ export default function Header() {
         // Keeps the collapsed menu out of the tab order and the a11y tree
         // while still allowing it to animate open.
         inert={!open}
-        className={`overflow-hidden border-t bg-canvas transition-[max-height,opacity] duration-500 ease-out-brand lg:hidden ${
+        className={`overflow-hidden border-t bg-canvas transition-[max-height,opacity] duration-500 ease-out-brand xl:hidden ${
           open
-            ? "max-h-[32rem] border-line opacity-100"
+            ? "max-h-[36rem] border-line opacity-100"
             : "max-h-0 border-transparent opacity-0"
         }`}
       >
@@ -178,14 +185,16 @@ export default function Header() {
             </ul>
 
             <div className="mt-6 mb-2 flex flex-col gap-3">
-              <Link
-                href="/contact"
+              <a
+                href={strategyCallHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 tabIndex={open ? undefined : -1}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-copper-500 px-6 py-3.5 text-sm font-semibold text-navy-950"
               >
-                Get in touch
+                Book a free strategy call
                 <ArrowRight />
-              </Link>
+              </a>
               <a
                 href={whatsappHref}
                 target="_blank"

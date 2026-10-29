@@ -9,21 +9,21 @@ import { projects } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected work from Carmo Technology — SmartKGMS kindergarten management, the National Health Professionals Council digital systems, and a custom laundry management system.",
+    "Case studies from Carmo Technology — SmartKGMS kindergarten management and the SmartLaundry laundry management system, both live and in daily use.",
 };
 
 export default function WorkPage() {
   return (
     <>
       <PageHero
-        eyebrow="Our work"
-        title="Real systems, in production, serving real users."
-        lead="From SaaS for schools to national regulatory infrastructure. Every project below is live today — visit them and judge for yourself."
+        eyebrow="Case studies"
+        title="Real work. Live today."
+        lead="Our own SaaS products — designed, built and supported by our team, and in daily use by the businesses that run on them. Visit them and judge for yourself."
       />
 
       <section className="bg-canvas py-24 lg:py-28">
         <Container>
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-8 lg:grid-cols-2">
             {projects.map((project, index) => (
               <Reveal key={project.name} delay={index * 110} variant="blur">
                 <div className="h-full">
@@ -43,9 +43,9 @@ export default function WorkPage() {
                 More work, not yet published.
               </h2>
               <p className="mt-4 leading-relaxed text-muted">
-                Some of what we build sits behind institutional logins or under client
-                confidentiality. If you would like to see relevant examples for your
-                sector, ask us — we can usually arrange a walkthrough.
+                Some of what we build sits behind client logins or under confidentiality.
+                If you&rsquo;d like to see examples relevant to your business, ask us —
+                we can usually arrange a walkthrough.
               </p>
             </div>
           </Reveal>

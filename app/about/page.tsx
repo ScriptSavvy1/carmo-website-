@@ -4,12 +4,12 @@ import Reveal from "@/components/Reveal";
 import CTABand from "@/components/CTABand";
 import Spotlight from "@/components/Spotlight";
 import { Container, RingMark, SectionHeading } from "@/components/ui";
-import { team, values } from "@/lib/site";
+import { countries, team, values } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Carmo Technology is named after a Somali tree valued for its fruit — local roots, global standards. Our story, mission, values and team.",
+    "Carmo Technology is named after a Somali tree valued for its fruit. Founded in Mogadishu and now based in Nairobi, Kenya, we serve businesses across East Africa. Our story, mission, values and team.",
 };
 
 export default function AboutPage() {
@@ -17,8 +17,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About us"
-        title="Rooted locally, built for the world."
-        lead="Carmo Technology was founded to prove a simple point: world-class systems can be designed, built and supported from Mogadishu."
+        title="Rooted in East Africa, built for the world."
+        lead="Carmo Technology was founded to prove a simple point: world-class AI and software can be designed, built and supported right here in the region — today from our base in Nairobi, Kenya."
       />
 
       {/* Story */}
@@ -51,6 +51,12 @@ export default function AboutPage() {
                     years later. Local roots — and engineering standards that would hold
                     up anywhere in the world.
                   </p>
+                  <p>
+                    Carmo began in Mogadishu. Today we are headquartered in Nairobi,
+                    Kenya — East Africa&rsquo;s technology hub — and work with businesses
+                    and institutions across the region, helping them put practical AI and
+                    modern software to work.
+                  </p>
                 </div>
               </Reveal>
             </div>
@@ -69,8 +75,8 @@ export default function AboutPage() {
                   Mission
                 </p>
                 <p className="mt-6 font-display text-2xl leading-snug text-fg">
-                  To build technology that measurably improves how organisations in
-                  Somalia and the wider region work.
+                  To put practical AI and modern software within reach of every
+                  business in East Africa — not just those with an in-house tech team.
                 </p>
                 <p className="mt-5 leading-relaxed text-muted">
                   Not pilots and prototypes — systems that go into daily use and stay
@@ -86,7 +92,7 @@ export default function AboutPage() {
                   Vision
                 </p>
                 <p className="mt-6 font-display text-2xl leading-snug text-fg">
-                  A Horn of Africa where the best technology serving the region is also
+                  An East Africa where the best technology serving the region is also
                   built in it.
                 </p>
                 <p className="mt-5 leading-relaxed text-muted">
@@ -96,6 +102,44 @@ export default function AboutPage() {
                 </p>
               </Spotlight>
             </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      {/* Where we work */}
+      <section className="bg-canvas pt-24 lg:pt-28">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <Reveal variant="left">
+                <SectionHeading
+                  eyebrow="Where we work"
+                  title="Based in Nairobi. Working across East Africa."
+                  lead="We work on-site where it helps and remotely everywhere else — so a client in Kampala, Kigali or Addis gets the same team as one down the road."
+                />
+              </Reveal>
+            </div>
+            <div className="lg:col-span-7">
+              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {countries.map((country, index) => (
+                  <Reveal key={country.name} as="li" delay={index * 70} variant="scale">
+                    <div
+                      className={`h-full rounded-2xl border p-5 transition-colors duration-300 hover:border-accent ${
+                        index === 0 ? "border-accent/50 bg-accent/[0.06]" : "border-line bg-card"
+                      }`}
+                    >
+                      <p className="flex items-center gap-2.5 font-display text-base font-medium text-fg">
+                        <RingMark />
+                        {country.name}
+                      </p>
+                      {"note" in country ? (
+                        <p className="mt-1.5 pl-5 text-sm text-muted">{country.note}</p>
+                      ) : null}
+                    </div>
+                  </Reveal>
+                ))}
+              </ul>
+            </div>
           </div>
         </Container>
       </section>
@@ -136,7 +180,7 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Our team"
               title="The people behind the work."
-              lead="A small, senior team — engineers, designers and advisors who have delivered systems that institutions depend on."
+              lead="A small, senior team — engineers, AI specialists, designers and advisors who have shipped products that businesses run on every day."
             />
           </Reveal>
 

@@ -113,3 +113,91 @@ export function CheckIcon({ className = "h-4 w-4" }: IconProps) {
     </svg>
   );
 }
+
+export function PlusIcon({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" className={className} {...stroke} strokeWidth={1.8} aria-hidden="true">
+      <path d="M8 3v10M3 8h10" />
+    </svg>
+  );
+}
+
+/* Service glyphs — one per service line, keyed by `Service["icon"]`. */
+
+function AiGlyph({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...stroke} aria-hidden="true">
+      <path d="M12 3.5 13.6 8a2 2 0 0 0 1.2 1.2l4.4 1.6-4.4 1.6a2 2 0 0 0-1.2 1.2L12 18l-1.6-4.4a2 2 0 0 0-1.2-1.2L4.8 10.8l4.4-1.6A2 2 0 0 0 10.4 8L12 3.5Z" />
+      <path d="M18.5 15.5v4M16.5 17.5h4M5.5 3.5v3M4 5h3" />
+    </svg>
+  );
+}
+
+function SoftwareGlyph({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...stroke} aria-hidden="true">
+      <rect x="2.5" y="4" width="13" height="10.5" rx="2" />
+      <path d="M6 18h6M9 14.5V18" />
+      <rect x="16.5" y="8" width="5" height="11" rx="1.4" />
+      <path d="m6.5 8-1.5 1.5L6.5 11M10.5 8l1.5 1.5-1.5 1.5" />
+    </svg>
+  );
+}
+
+function WebGlyph({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...stroke} aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" />
+    </svg>
+  );
+}
+
+function TrainingGlyph({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...stroke} aria-hidden="true">
+      <path d="M2.5 9 12 4.5 21.5 9 12 13.5 2.5 9Z" />
+      <path d="M6.5 11v4.5c0 1.4 2.5 3 5.5 3s5.5-1.6 5.5-3V11M21.5 9v5" />
+    </svg>
+  );
+}
+
+function AdvisoryGlyph({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...stroke} aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" />
+    </svg>
+  );
+}
+
+function DesignGlyph({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...stroke} aria-hidden="true">
+      <path d="M12 21a9 9 0 1 1 9-9c0 2.2-1.8 3.5-3.8 3.5h-1.9a1.8 1.8 0 0 0-1.3 3.1c.5.5.3 2.4-2 2.4Z" />
+      <circle cx="7.5" cy="11" r="1.1" />
+      <circle cx="10.5" cy="7" r="1.1" />
+      <circle cx="15.5" cy="7.5" r="1.1" />
+    </svg>
+  );
+}
+
+const serviceGlyphs = {
+  ai: AiGlyph,
+  software: SoftwareGlyph,
+  web: WebGlyph,
+  training: TrainingGlyph,
+  advisory: AdvisoryGlyph,
+  design: DesignGlyph,
+} as const;
+
+export function ServiceIcon({
+  icon,
+  className = "h-5 w-5",
+}: {
+  icon: keyof typeof serviceGlyphs;
+  className?: string;
+}) {
+  const Glyph = serviceGlyphs[icon];
+  return <Glyph className={className} />;
+}

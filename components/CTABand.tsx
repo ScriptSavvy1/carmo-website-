@@ -1,7 +1,7 @@
 import Reveal from "./Reveal";
 import { Aurora, Button, Container, Eyebrow, ArrowRight } from "./ui";
 import { MailIcon, WhatsAppIcon } from "./icons";
-import { site, whatsapp, whatsappHref } from "@/lib/site";
+import { site, strategyCallHref, whatsapp, whatsappHref } from "@/lib/site";
 
 export default function CTABand() {
   return (
@@ -28,25 +28,26 @@ export default function CTABand() {
         <Reveal>
           <div className="flex flex-col gap-10 py-20 lg:flex-row lg:items-end lg:justify-between lg:py-24">
             <div className="max-w-xl">
-              <Eyebrow tone="ink">Start a conversation</Eyebrow>
+              <Eyebrow tone="ink">Free strategy call</Eyebrow>
               <h2 className="mt-4 text-3xl tracking-tight text-white sm:text-4xl">
-                Tell us what you&rsquo;re trying to build.
+                Got a process that eats your team&rsquo;s time — or an idea you want
+                built?
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-navy-100">
-                Whether it&rsquo;s a national system, a product idea or a brand that
-                needs rebuilding — we&rsquo;ll tell you honestly what it takes.
+                Tell us about it on a free, no-obligation call. We&rsquo;ll tell you
+                honestly what it would take — and whether it&rsquo;s worth doing.
               </p>
             </div>
 
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                <Button href="/contact">
-                  Start a project
-                  <ArrowRight />
-                </Button>
-                <Button href={whatsappHref} variant="ghost">
+                <Button href={strategyCallHref}>
                   <WhatsAppIcon className="h-4.5 w-4.5" />
-                  WhatsApp us
+                  Book a free strategy call
+                </Button>
+                <Button href="/contact" variant="ghost">
+                  Send a message
+                  <ArrowRight />
                 </Button>
               </div>
 

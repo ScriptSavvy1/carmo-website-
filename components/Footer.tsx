@@ -2,7 +2,7 @@ import Link from "next/link";
 import Logo from "./Logo";
 import { Container } from "./ui";
 import { MailIcon, PinIcon, WhatsAppIcon, socialIcons } from "./icons";
-import { nav, services, site, socials, whatsapp, whatsappHref } from "@/lib/site";
+import { companyLinks, services, site, socials, whatsapp, whatsappHref } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -28,8 +28,8 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <Logo tone="light" className="text-[1.5rem]" />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-navy-200">
-              {site.tagline} Software, AI and design — rooted in Somalia, built to
-              global standards.
+              {site.tagline} AI, software, web and design for businesses across
+              East Africa — from Nairobi, Kenya.
             </p>
 
             <a
@@ -48,7 +48,7 @@ export default function Footer() {
               Company
             </h2>
             <ul className="mt-5 space-y-3">
-              {nav.map((item) => (
+              {companyLinks.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -69,7 +69,7 @@ export default function Footer() {
               {services.map((service) => (
                 <li key={service.slug}>
                   <Link
-                    href={`/services#${service.slug}`}
+                    href={service.href}
                     className="inline-block text-sm text-navy-200 transition-all duration-300 hover:translate-x-0.5 hover:text-copper-300"
                   >
                     {service.title}
@@ -104,9 +104,12 @@ export default function Footer() {
                   {whatsapp.display}
                 </a>
               </li>
-              <li className="inline-flex items-center gap-2.5">
-                <PinIcon className="h-4 w-4 shrink-0 text-copper-400" />
-                {site.location}
+              <li className="flex items-start gap-2.5">
+                <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-copper-400" />
+                <span>
+                  {site.location}
+                  <span className="block text-navy-300">Serving all of {site.region}</span>
+                </span>
               </li>
             </ul>
 
@@ -139,7 +142,7 @@ export default function Footer() {
               aria-hidden="true"
               className="inline-block h-2 w-2 rounded-full border-2 border-copper-500"
             />
-            Rooted locally, built for the world.
+            Rooted in East Africa, built for the world.
           </p>
         </div>
       </Container>

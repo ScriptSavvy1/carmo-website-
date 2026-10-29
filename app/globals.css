@@ -250,6 +250,10 @@
   }
 
   body {
+    /* Content waiting to slide in from the side sits a few px off-screen;
+       clip it so it can never widen the page on a phone. `clip` (unlike
+       `hidden`) leaves position: sticky working. */
+    overflow-x: clip;
     background-color: var(--canvas);
     color: var(--fg);
     font-family: var(--font-sans);
@@ -510,7 +514,10 @@
     scroll-behavior: auto;
   }
 
-  .reveal {
+  /* [data-variant] matches the specificity of the variant rules above, so
+     the offsets are really cancelled rather than silently winning. */
+  .reveal,
+  .reveal[data-variant] {
     opacity: 1;
     transform: none;
     filter: none;

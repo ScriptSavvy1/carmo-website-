@@ -9,7 +9,7 @@ import { industries } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Industries",
   description:
-    "Carmo Technology works with government and the public sector, healthcare, finance, education, NGOs, logistics and trade, and startups and SMEs.",
+    "AI, software and web for East African businesses — healthcare and clinics, education, retail, hospitality, SACCOs and financial services, logistics, real estate, NGOs, government and SMEs.",
 };
 
 export default function IndustriesPage() {
@@ -17,8 +17,8 @@ export default function IndustriesPage() {
     <>
       <PageHero
         eyebrow="Industries"
-        title="We build where the details matter."
-        lead="A licensing register, a school's daily attendance and a donor's monitoring report all fail in different ways. Knowing the sector is half the work."
+        title="Built for businesses across East Africa."
+        lead="A clinic's front desk, a school's daily register and a SACCO's loan book all fail in different ways. Knowing the sector is half the work."
       />
 
       <section className="bg-canvas py-24 lg:py-28">

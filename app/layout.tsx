@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { themeInitScript } from "@/components/ThemeToggle";
-import { site } from "@/lib/site";
+import { countries, services, site, whatsapp } from "@/lib/site";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -29,16 +29,20 @@ export const metadata: Metadata = {
   },
   description: site.description,
   keywords: [
-    "software development Somalia",
-    "Mogadishu technology company",
-    "AI and automation Horn of Africa",
-    "management information systems",
-    "brand and UI design Somalia",
+    "AI solutions for business Kenya",
+    "AI automation Nairobi",
+    "WhatsApp AI assistant Kenya",
+    "AI receptionist East Africa",
+    "software development Nairobi",
+    "SaaS and mobile app development Kenya",
+    "website design Nairobi",
+    "AI training Nairobi",
+    "technology company East Africa",
   ],
   authors: [{ name: site.name }],
   openGraph: {
     type: "website",
-    locale: "en_GB",
+    locale: "en_KE",
     url: site.url,
     siteName: site.name,
     title: `${site.name} — ${site.tagline}`,
@@ -53,6 +57,24 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+};
+
+/** Organisation details for search engines and AI answer engines. */
+const organizationData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: site.name,
+  description: site.description,
+  url: site.url,
+  email: site.email,
+  telephone: `+${whatsapp.number}`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Nairobi",
+    addressCountry: "KE",
+  },
+  areaServed: countries.map((country) => country.name),
+  knowsAbout: services.map((service) => service.title),
 };
 
 export const viewport: Viewport = {
@@ -96,6 +118,10 @@ export default function RootLayout({
         </main>
         <Footer />
         <WhatsAppButton />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
+        />
       </body>
     </html>
   );

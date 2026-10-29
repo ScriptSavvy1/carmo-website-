@@ -1,6 +1,7 @@
 # Carmo Technology — Website
 
-Marketing site for Carmo Technology (Mogadishu, Somalia).
+Marketing site for Carmo Technology — AI, software, web, training, advisory and
+design for businesses across East Africa (Nairobi, Kenya).
 
 Built with **Next.js 15** (App Router), **TypeScript**, and **Tailwind CSS v4**.
 
@@ -30,8 +31,10 @@ Requires Node 18.18+ (developed on Node 22).
 app/
   layout.tsx          Root layout — fonts, metadata, header/footer, skip link
   page.tsx            Home
-  about/              About — story, mission, vision, values, team
-  services/           Services — four detailed sections
+  about/              About — story, mission, vision, where we work, values, team
+  services/           Services — overview of all six service lines + FAQ
+  services/[slug]/    One page per service (rendered by components/ServiceDetail)
+  training/           AI Training & Workshops (same layout, its own URL)
   work/               Work — case studies
   industries/         Industries
   contact/            Contact — form + direct details
@@ -47,7 +50,10 @@ components/
   Footer.tsx
   PageHero.tsx        Shared inner-page hero
   CTABand.tsx         Shared contact CTA
-  cards.tsx           Service + project cards
+  cards.tsx           Goal, service + project cards
+  ServiceDetail.tsx   Service page layout — problems, offerings, process, FAQ
+  Process.tsx         Discover → Plan → Build → Improve
+  Faq.tsx             FAQ accordion (+ FAQPage structured data)
   ContactForm.tsx
   Reveal.tsx          Scroll-reveal wrapper
   ui.tsx              Container, buttons, headings, ring motif
@@ -66,6 +72,11 @@ public/
 
 Everything lives in **`lib/site.ts`**. The pages render from it, so adding a
 project or reordering services is a single edit there — no JSX changes needed.
+
+Each entry in `services` drives a whole page: the hero, "Sound familiar?"
+problems, "Who this is for", the offerings grid, FAQs, related services and
+the WhatsApp message its buttons pre-fill. A service whose `href` starts with
+`/services/` gets a page automatically; Training lives at `/training`.
 
 To **add a portfolio project**, append to the `projects` array:
 
@@ -241,4 +252,5 @@ Any Next.js host works. **Vercel** is the path of least resistance:
 - [ ] Replace social `#` placeholders
 - [ ] Add an Open Graph share image (`app/opengraph-image.png`, 1200×630)
 - [ ] Confirm `carmotechnology1@gmail.com` is monitored
-- [ ] Confirm the WhatsApp number in `lib/site.ts` is the one that should receive enquiries
+- [ ] Send a test WhatsApp from the site and confirm it reaches +254 183 422320
+- [ ] Re-render the brand film in `marketing/` — it still shows NHPC, Mogadishu and the old number

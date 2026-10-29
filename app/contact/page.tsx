@@ -5,11 +5,11 @@ import Reveal from "@/components/Reveal";
 import Spotlight from "@/components/Spotlight";
 import { MailIcon, PinIcon, WhatsAppIcon, socialIcons } from "@/components/icons";
 import { Container, RingMark } from "@/components/ui";
-import { site, socials, whatsapp, whatsappHref } from "@/lib/site";
+import { site, socials, strategyCallHref, whatsapp, whatsappHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Start a project with Carmo Technology. Email ${site.email}, message us on WhatsApp, or send us a note — we're based in Mogadishu, Somalia.`,
+  description: `Start a project with Carmo Technology. Email ${site.email}, message us on WhatsApp, or send us a note — we're based in Nairobi, Kenya and work across East Africa.`,
 };
 
 export default function ContactPage() {
@@ -17,8 +17,8 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Let's talk about what you're building."
-        lead="Tell us the problem rather than the solution — we'll come back with what we think it actually takes."
+        title="Let's talk about what you're trying to solve."
+        lead="Book a free, no-obligation strategy call, or tell us the problem rather than the solution — we'll come back with what we think it actually takes."
       />
 
       <section className="bg-canvas py-24 lg:py-28">
@@ -41,7 +41,7 @@ export default function ContactPage() {
                 <div className="space-y-6">
                   {/* WhatsApp is the fastest route — give it its own card. */}
                   <a
-                    href={whatsappHref}
+                    href={strategyCallHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center gap-4 rounded-2xl border border-[#25D366]/25 bg-[#25D366]/[0.07] p-6 transition-all duration-500 ease-out-brand hover:-translate-y-1 hover:border-[#25D366]/60 hover:bg-[#25D366]/[0.12]"
@@ -51,10 +51,10 @@ export default function ContactPage() {
                     </span>
                     <span>
                       <span className="block font-display text-base font-medium text-fg">
-                        Message us on WhatsApp
+                        Book a free strategy call
                       </span>
                       <span className="mt-0.5 block text-sm text-muted">
-                        {whatsapp.display} — usually the quickest reply
+                        WhatsApp {whatsapp.display} — usually the quickest reply
                       </span>
                     </span>
                   </a>
@@ -106,6 +106,9 @@ export default function ContactPage() {
                         <dd className="mt-1.5 font-display text-lg font-medium text-fg">
                           {site.location}
                         </dd>
+                        <dd className="mt-1 text-sm text-muted">
+                          Serving clients across {site.region} — on-site or remotely
+                        </dd>
                       </div>
 
                       <div>
@@ -130,9 +133,8 @@ export default function ContactPage() {
                     </dl>
 
                     <p className="mt-8 border-t border-line pt-6 text-sm leading-relaxed text-muted">
-                      Working with a government body or development partner? Mention it in
-                      your message — we can share procurement-ready documentation and
-                      references.
+                      Working with an NGO, institution or government body? Mention it in
+                      your message — we can share procurement-ready documentation.
                     </p>
                   </Spotlight>
                 </div>
