@@ -20,10 +20,41 @@ export const site = {
  * WhatsApp contact. `number` is digits-only in full international format —
  * that is what wa.me expects. `display` is what users read.
  */
+/**
+ * Builds the text a WhatsApp button types for the visitor: a greeting, what
+ * they want, then labelled blanks for the details we would otherwise have to
+ * ask for in a second message. WhatsApp shows *Label:* in bold once sent.
+ */
+export function enquiry(intent: string, fields: readonly string[] = projectFields) {
+  return [
+    "Hello Carmo Technology 👋",
+    "",
+    intent,
+    "",
+    ...fields.map((field) => `*${field}:* `),
+  ].join("\n");
+}
+
+/** Blanks for a general project enquiry. */
+const projectFields = [
+  "Name",
+  "Business / organisation",
+  "What I need help with",
+  "Timeline (if any)",
+] as const;
+
+/** Blanks for anything that leads to a strategy call. */
+const callFields = [
+  "Name",
+  "Business / organisation",
+  "What I'd like to discuss",
+  "Best day & time for a call",
+] as const;
+
 export const whatsapp = {
   number: "254183422320",
   display: "+254 183 422320",
-  message: "Hello Carmo Technology — I'd like to talk about a project.",
+  message: enquiry("I'd like to talk about a project."),
 } as const;
 
 /** A wa.me link that opens WhatsApp with `message` already typed. */
@@ -35,7 +66,7 @@ export const whatsappHref = whatsappLink();
 
 /** The primary call to action everywhere on the site. */
 export const strategyCallHref = whatsappLink(
-  "Hello Carmo Technology — I'd like to book a free strategy call.",
+  enquiry("I'd like to book a free strategy call.", callFields),
 );
 
 export const nav = [
@@ -209,7 +240,10 @@ export const services: Service[] = [
     related: ["software-saas", "web-digital", "ai-training"],
     cta: {
       label: "Book a free strategy call",
-      message: "Hello Carmo Technology — I'd like to talk about AI and automation for my business.",
+      message: enquiry(
+        "I'd like to book a free strategy call about AI and automation for my business.",
+        callFields,
+      ),
     },
   },
   {
@@ -309,7 +343,12 @@ export const services: Service[] = [
     work: ["Smart Kindergarten (SmartKGMS)", "SmartLaundry"],
     cta: {
       label: "Book a free strategy call",
-      message: "Hello Carmo Technology — I have a software / app idea I'd like to talk through.",
+      message: enquiry("I have a software / app idea I'd like to talk through.", [
+        "Name",
+        "Business / organisation",
+        "The idea, in a sentence or two",
+        "Best day & time for a call",
+      ]),
     },
   },
   {
@@ -387,7 +426,12 @@ export const services: Service[] = [
     related: ["design-branding", "ai-automation", "software-saas"],
     cta: {
       label: "Book a free strategy call",
-      message: "Hello Carmo Technology — I'd like to talk about a new or improved website.",
+      message: enquiry("I'd like to talk about a new or improved website.", [
+        "Name",
+        "Business / organisation",
+        "Current website (if any)",
+        "Best day & time for a call",
+      ]),
     },
   },
   {
@@ -487,12 +531,20 @@ export const services: Service[] = [
     related: ["ai-automation", "advisory"],
     cta: {
       label: "Join the workshop waitlist",
-      message:
-        "Hello Carmo Technology — please add me to the waitlist for the AI Fundamentals workshop.",
+      message: enquiry("Please add me to the waitlist for the AI Fundamentals workshop.", [
+        "Name",
+        "Email (for dates & venue)",
+        "Number of seats",
+      ]),
     },
     secondaryCta: {
       label: "Ask about team training",
-      message: "Hello Carmo Technology — I'd like to ask about AI training for my team.",
+      message: enquiry("I'd like to ask about AI training for my team.", [
+        "Name",
+        "Organisation",
+        "Team size",
+        "On-site in Nairobi or online?",
+      ]),
     },
   },
   {
@@ -566,7 +618,7 @@ export const services: Service[] = [
     related: ["ai-automation", "software-saas", "ai-training"],
     cta: {
       label: "Book a free strategy call",
-      message: "Hello Carmo Technology — I'd like advice on our technology / AI strategy.",
+      message: enquiry("I'd like advice on our technology / AI strategy.", callFields),
     },
   },
   {
@@ -636,7 +688,12 @@ export const services: Service[] = [
     related: ["web-digital", "software-saas", "advisory"],
     cta: {
       label: "Book a free strategy call",
-      message: "Hello Carmo Technology — I'd like to talk about design and branding.",
+      message: enquiry("I'd like to talk about design and branding.", [
+        "Name",
+        "Business / organisation",
+        "What I need designed",
+        "Timeline (if any)",
+      ]),
     },
   },
 ];

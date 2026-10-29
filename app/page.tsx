@@ -56,7 +56,7 @@ function Hero() {
         <div className="grid gap-16 py-24 lg:grid-cols-12 lg:gap-8 lg:py-32">
           <div className="lg:col-span-7">
             <div className="animate-rise">
-              <Badge>Nairobi, Kenya · Serving businesses across East Africa</Badge>
+              <Badge>East Africa&rsquo;s AI &amp; technology partner</Badge>
             </div>
 
             <h1 className="mt-8 animate-rise text-4xl leading-[1.08] tracking-tight text-white [animation-delay:100ms] sm:text-5xl lg:text-[3.4rem]">
